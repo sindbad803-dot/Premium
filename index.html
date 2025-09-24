@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع مشاركة الصور</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأنماط تبقى كما هي */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-left: 10px;
+            font-size: 28px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .auth-buttons button {
+            background-color: white;
+            color: var(--primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .auth-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* User View Styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .image-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-text {
+            padding: 15px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .copy-btn i {
+            margin-left: 8px;
+        }
+
+        /* Admin View Styles */
+        .admin-form {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .admin-image-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-image-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .admin-card-content {
+            padding: 15px;
+        }
+
+        .admin-card-content h4 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .admin-card-content p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .delete-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                margin-top: 15px;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: var(--success);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .notification.hide {
+            animation: slideOut 0.3s ease forwards;
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .notification i {
+            margin-left: 10px;
+        }
+        
+        .notification.error {
+            background: var(--danger);
+        }
+        
+        /* Debug Info */
+        .debug-info {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-images"></i>
+                    موقع الصور
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="user-view">المستخدم</a></li>
+                        <li><a href="#" class="nav-link" data-page="admin-view">المسؤول</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button id="login-btn">تسجيل الدخول</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- User View -->
+        <div id="user-view" class="page active">
+            <h2 class="page-title">معرض الصور</h2>
+            <div class="debug-info" id="user-debug">
+                حالة تحميل الصور: جاري التحميل...
+            </div>
+            <div class="gallery" id="image-gallery">
+                <!-- Images will be loaded here dynamically -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin View -->
+        <div id="admin-view" class="page">
+            <h2 class="page-title">لوحة التحكم</h2>
+            <div class="debug-info" id="admin-debug">
+                حالة تحميل الصور: جاري التحميل...
+            </div>
+            <div class="admin-form">
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--secondary);">إضافة صورة جديدة</h3>
+                <form id="add-image-form">
+                    <div class="form-group">
+                        <label for="image-upload">رفع صورة من الجهاز:</label>
+                        <input type="file" id="image-upload" class="form-control" accept="image/*" required>
+                        <small style="color: #666;">يمكنك رفع صورة من هاتفك أو جهازك</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="image-text">النص المرافق للصورة:</label>
+                        <textarea id="image-text" class="form-control" rows="3" placeholder="أدخل النص الذي سيظهر مع الصورة" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="author-name">اسم الناشر:</label>
+                        <input type="text" id="author-name" class="form-control" placeholder="أدخل اسم الناشر" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus"></i> نشر الصورة
+                    </button>
+                </form>
+            </div>
+            
+            <h3 style="margin: 30px 0 15px; color: var(--secondary);">الصور المنشورة</h3>
+            <div class="admin-images" id="admin-image-list">
+                <!-- Admin images will be loaded here dynamically -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal" id="image-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="" alt="صورة" class="modal-image" id="modal-image">
+            <p class="modal-text" id="modal-text"></p>
+            <p style="margin-bottom: 15px; color: #666;" id="modal-author"></p>
+            <button class="copy-btn" id="copy-text-btn">
+                <i class="far fa-copy"></i> نسخ النص
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDny7BKJEHxXXRJs9rPBJJ_iY9JM8X_Gik",
+            authDomain: "sk-a803-ecf23.firebaseapp.com",
+            projectId: "sk-a803-ecf23",
+            storageBucket: "sk-a803-ecf23.firebasestorage.app",
+            messagingSenderId: "501659210880",
+            appId: "1:501659210880:web:4dae2f4a1bf216b3ed0265",
+            measurementId: "G-SSCKQM4PZ7"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // DOM Elements
+        const userView = document.getElementById('user-view');
+        const adminView = document.getElementById('admin-view');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const imageGallery = document.getElementById('image-gallery');
+        const adminImageList = document.getElementById('admin-image-list');
+        const addImageForm = document.getElementById('add-image-form');
+        const imageModal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalText = document.getElementById('modal-text');
+        const modalAuthor = document.getElementById('modal-author');
+        const copyTextBtn = document.getElementById('copy-text-btn');
+        const closeModal = document.querySelector('.close-modal');
+        const userDebug = document.getElementById('user-debug');
+        const adminDebug = document.getElementById('admin-debug');
+
+        // تسجيل الدخول كمستخدم مجهول
+        signInAnonymously(auth)
+            .then(() => {
+                console.log("تم تسجيل الدخول بنجاح");
+                userDebug.textContent = "حالة تحميل الصور: تم الاتصال بقاعدة البيانات";
+                adminDebug.textContent = "حالة تحميل الصور: تم الاتصال بقاعدة البيانات";
+                loadImages();
+            })
+            .catch((error) => {
+                console.error("خطأ في تسجيل الدخول:", error);
+                userDebug.textContent = "حالة تحميل الصور: خطأ في الاتصال بقاعدة البيانات - " + error.message;
+                adminDebug.textContent = "حالة تحميل الصور: خطأ في الاتصال بقاعدة البيانات - " + error.message;
+            });
+
+        // Navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                
+                // Update active nav link
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Show selected page
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById(page).classList.add('active');
+            });
+        });
+
+        // Load images from Firestore
+        function loadImages() {
+            // استمع للتحديثات في الوقت الفعلي
+            onSnapshot(collection(db, "images"), (snapshot) => {
+                console.log("تم استلام البيانات:", snapshot.size, "صورة");
+                userDebug.textContent = `حالة تحميل الصور: تم تحميل ${snapshot.size} صورة`;
+                adminDebug.textContent = `حالة تحميل الصور: تم تحميل ${snapshot.size} صورة`;
+                
+                imageGallery.innerHTML = '';
+                adminImageList.innerHTML = '';
+                
+                if (snapshot.empty) {
+                    imageGallery.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px; color: #666;">لا توجد صور لعرضها</p>';
+                    adminImageList.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px; color: #666;">لا توجد صور لعرضها</p>';
+                    return;
+                }
+                
+                snapshot.forEach((doc) => {
+                    const imageData = doc.data();
+                    const imageId = doc.id;
+                    
+                    console.log("صورة:", imageData);
+                    
+                    // التحقق من وجود البيانات المطلوبة
+                    if (!imageData.url || !imageData.text || !imageData.author) {
+                        console.warn("بيانات الصورة غير مكتملة:", imageData);
+                        return;
+                    }
+                    
+                    // إنشاء بطاقة الصورة لواجهة المستخدم
+                    const imageCard = document.createElement('div');
+                    imageCard.className = 'image-card';
+                    imageCard.innerHTML = `
+                        <img src="${imageData.url}" alt="صورة" onerror="this.src='https://via.placeholder.com/280x200?text=خطأ+في+الصورة'">
+                        <div class="image-text">${imageData.text}</div>
+                    `;
+                    
+                    imageCard.addEventListener('click', () => {
+                        openModal(imageData.url, imageData.text, imageData.author);
+                    });
+                    
+                    imageGallery.appendChild(imageCard);
+                    
+                    // إنشاء بطاقة الصورة لواجهة المسؤول
+                    const adminCard = document.createElement('div');
+                    adminCard.className = 'admin-image-card';
+                    adminCard.innerHTML = `
+                        <img src="${imageData.url}" alt="صورة" onerror="this.src='https://via.placeholder.com/250x150?text=خطأ+في+الصورة'">
+                        <div class="admin-card-content">
+                            <h4>${imageData.text.substring(0, 30)}${imageData.text.length > 30 ? '...' : ''}</h4>
+                            <p>الناشر: ${imageData.author}</p>
+                            <button class="delete-btn" data-id="${imageId}">حذف</button>
+                        </div>
+                    `;
+                    
+                    adminImageList.appendChild(adminCard);
+                });
+                
+                // إضافة مستمعين لأزرار الحذف
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const imageId = e.target.getAttribute('data-id');
+                        deleteImage(imageId);
+                    });
+                });
+            }, (error) => {
+                console.error("خطأ في تحميل الصور:", error);
+                userDebug.textContent = "حالة تحميل الصور: خطأ في تحميل الصور - " + error.message;
+                adminDebug.textContent = "حالة تحميل الصور: خطأ في تحميل الصور - " + error.message;
+                showNotification('حدث خطأ في تحميل الصور', 'error');
+            });
+        }
+
+        // فتح النافذة المنبثقة للصورة
+        function openModal(imageUrl, text, author) {
+            modalImage.src = imageUrl;
+            modalText.textContent = text;
+            modalAuthor.textContent = `نشر بواسطة: ${author}`;
+            imageModal.classList.add('active');
+            
+            // نسخ النص عند النقر على الزر
+            copyTextBtn.onclick = () => {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('تم نسخ النص بنجاح!');
+                });
+            };
+        }
+
+        // إغلاق النافذة المنبثقة
+        closeModal.addEventListener('click', () => {
+            imageModal.classList.remove('active');
+        });
+
+        // إغلاق النافذة المنبثقة عند النقر خارجها
+        window.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+            }
+        });
+
+        // إضافة صورة جديدة
+        addImageForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const imageFile = document.getElementById('image-upload').files[0];
+            const imageText = document.getElementById('image-text').value;
+            const authorName = document.getElementById('author-name').value;
+            
+            if (!imageFile) {
+                showNotification('يرجى اختيار صورة', 'error');
+                return;
+            }
+            
+            try {
+                // تحويل الصورة إلى رابط قاعدة 64 (Base64)
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const imageUrl = e.target.result;
+                    
+                    // التحقق من أن الصورة محملة بشكل صحيح
+                    if (!imageUrl) {
+                        showNotification('حدث خطأ في تحميل الصورة', 'error');
+                        return;
+                    }
+                    
+                    await addDoc(collection(db, "images"), {
+                        url: imageUrl,
+                        text: imageText,
+                        author: authorName,
+                        timestamp: new Date()
+                    });
+                    
+                    // إعادة تعيين النموذج
+                    addImageForm.reset();
+                    showNotification('تم إضافة الصورة بنجاح!');
+                };
+                
+                reader.onerror = function() {
+                    showNotification('حدث خطأ في قراءة الصورة', 'error');
+                };
+                
+                reader.readAsDataURL(imageFile);
+                
+            } catch (error) {
+                console.error("Error adding image: ", error);
+                showNotification('حدث خطأ أثناء إضافة الصورة', 'error');
+            }
+        });
+
+        // حذف صورة
+        async function deleteImage(imageId) {
+            if (!confirm('هل أنت متأكد من حذف هذه الصورة؟')) {
+                return;
+            }
+            
+            try {
+                await deleteDoc(doc(db, "images", imageId));
+                showNotification('تم حذف الصورة بنجاح!');
+            } catch (error) {
+                console.error("Error deleting image: ", error);
+                showNotification('حدث خطأ أثناء حذف الصورة', 'error');
+            }
+        }
+
+        // عرض الإشعارات
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type === 'error' ? 'error' : ''}`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('hide');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // زر تسجيل الدخول (وهمي للعرض)
+        document.getElementById('login-btn').addEventListener('click', () => {
+            showNotification('هذه الميزة غير متاحة في العرض التوضيحي');
+        });
+    </script>
+</body>
+</html>
