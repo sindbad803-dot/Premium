@@ -3,7 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium AI - موقع نشر الصور</title>
+    <title>Premium AI - معرض الصور الذكي</title>
+    <meta name="description" content="استكشف معرض الصور المميز مع تقنية الذكاء الاصطناعي. تصفح آلاف الصور عالية الجودة مع نصوص مصاحبة.">
+    <meta name="keywords" content="صور, معرض صور, الذكاء الاصطناعي, صور عالية الجودة, نصوص مصاحبة">
+    <meta name="author" content="Premium AI">
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="google69ff7d255be64110">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Premium AI - معرض الصور الذكي">
+    <meta property="og:description" content="استكشف معرض الصور المميز مع تقنية الذكاء الاصطناعي">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://premiumai.vercel.app/">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Premium AI",
+        "url": "https://premiumai.vercel.app/",
+        "description": "معرض الصور المميز مع تقنية الذكاء الاصطناعي",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://premiumai.vercel.app/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -26,6 +55,16 @@
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
+        .high-contrast {
+            --primary-color: #0056b3;
+            --secondary-color: #004494;
+            --accent-color: #003375;
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --card-bg: #f8f8f8;
+            --border-color: #000000;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -39,6 +78,23 @@
             transition: var(--transition);
             min-height: 100vh;
             line-height: 1.6;
+        }
+
+        body.large-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         header {
@@ -58,7 +114,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -84,12 +140,12 @@
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .theme-toggle, .menu-toggle {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             width: 45px;
             height: 45px;
             border-radius: 50%;
@@ -103,15 +159,41 @@
         }
 
         .theme-toggle:hover, .menu-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.35);
             transform: scale(1.1);
         }
 
+        /* Loading Bar */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        .loading-bar.active {
+            transform: scaleX(0.7);
+            animation: loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: scaleX(0); transform-origin: left; }
+            50% { transform: scaleX(1); transform-origin: left; }
+            100% { transform: scaleX(0); transform-origin: right; }
+        }
+
+        /* Sidebar */
         .sidebar {
             position: fixed;
-            right: -350px;
+            right: -400px;
             top: 0;
-            width: 350px;
+            width: 400px;
             height: 100vh;
             background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
             box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
@@ -129,7 +211,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
@@ -147,10 +229,141 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .close-sidebar:hover {
+            background: rgba(255, 255, 255, 0.1);
             transform: rotate(90deg);
+        }
+
+        .sidebar-counter {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 1rem 1.2rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-size: 1.1rem;
+        }
+
+        .sidebar-counter i {
+            font-size: 1.2rem;
+        }
+
+        .sidebar-counter .count {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        /* Accessibility Section */
+        .sidebar-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-section-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-section-title i {
+            font-size: 1.1rem;
+        }
+
+        .accessibility-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .accessibility-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .accessibility-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .accessibility-option input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .accessibility-option label {
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* View Controls Section */
+        .view-controls-sidebar {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .view-control-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .view-control-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .view-control-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .view-control-btn i {
+            font-size: 1.3rem;
         }
 
         .sidebar ul {
@@ -158,7 +371,7 @@
         }
 
         .sidebar ul li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .sidebar ul li a {
@@ -167,15 +380,16 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.2rem;
             border-radius: 12px;
             transition: var(--transition);
             font-weight: 500;
             background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .sidebar ul li a i {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             width: 20px;
             text-align: center;
         }
@@ -183,6 +397,7 @@
         .sidebar ul li a:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateX(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .overlay {
@@ -202,7 +417,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
             min-height: calc(100vh - 80px);
@@ -231,10 +446,53 @@
             border-radius: 2px;
         }
 
+        /* View Styles - FIXED */
         .images-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
+            transition: var(--transition);
+        }
+
+        .grid-view {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .grid-view.small {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+
+        .grid-view.medium {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .grid-view.large {
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        }
+
+        .list-view {
+            grid-template-columns: 1fr;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .list-view .image-card {
+            display: flex;
+            height: 250px;
+        }
+
+        .list-view .image-card img {
+            width: 300px;
+            height: 100%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .list-view .image-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
         }
 
         .image-card {
@@ -245,6 +503,16 @@
             transition: var(--transition);
             cursor: pointer;
             border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .image-card:hover {
@@ -252,7 +520,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .image-card img {
+        .grid-view .image-card img {
             width: 100%;
             height: 220px;
             object-fit: cover;
@@ -286,6 +554,52 @@
             font-size: 0.8rem;
         }
 
+        /* AdSense Ready Containers */
+        .adsense-container {
+            width: 100%;
+            margin: 2rem 0;
+            background: var(--bg-color);
+            border: 2px dashed var(--border-color);
+            border-radius: 10px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+        }
+
+        .adsense-container.horizontal {
+            height: 90px;
+        }
+
+        .adsense-container.vertical {
+            height: 250px;
+            width: 300px;
+            margin: 1rem auto;
+        }
+
+        .adsense-container.rectangle {
+            height: 250px;
+        }
+
+        .adsense-placeholder {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .adsense-placeholder i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .adsense-placeholder p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Modal */
         .modal {
             position: fixed;
             top: 0;
@@ -373,6 +687,13 @@
             font-size: 1.05rem;
         }
 
+        .reading-mode .modal-text {
+            max-height: none;
+            font-size: 1.2rem;
+            line-height: 2;
+            text-align: justify;
+        }
+
         .modal-actions {
             display: flex;
             justify-content: space-between;
@@ -409,200 +730,7 @@
             gap: 0.5rem;
         }
 
-        .admin-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .upload-area {
-            border: 3px dashed var(--border-color);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            cursor: pointer;
-            transition: var(--transition);
-            background: var(--card-bg);
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-        }
-
-        .upload-area i {
-            font-size: 4rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .upload-area p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            color: var(--text-color);
-        }
-
-        .upload-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(74, 108, 247, 0.3);
-        }
-
-        .upload-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 108, 247, 0.4);
-        }
-
-        .preview-image {
-            max-width: 100%;
-            max-height: 300px;
-            margin-top: 1.5rem;
-            border-radius: 12px;
-            display: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .upload-status {
-            text-align: center;
-            margin-top: 1rem;
-            font-weight: 600;
-            display: none;
-            padding: 0.8rem;
-            border-radius: 8px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background-color: var(--border-color);
-            border-radius: 4px;
-            margin-top: 1.5rem;
-            overflow: hidden;
-            display: none;
-        }
-
-        .progress {
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 1.1rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-            line-height: 1.6;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 1.2rem;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: var(--transition);
-            margin-top: 1rem;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(74, 108, 247, 0.3);
-        }
-
-        .submit-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 108, 247, 0.4);
-        }
-
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .submit-btn.loading {
-            padding-right: 4rem;
-        }
-
-        .submit-btn.loading::after {
-            content: '';
-            position: absolute;
-            right: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1.5rem;
-            height: 1.5rem;
-            border: 3px solid transparent;
-            border-top: 3px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: translateY(-50%) rotate(0deg); }
-            100% { transform: translateY(-50%) rotate(360deg); }
-        }
-
-        .admin-login {
-            max-width: 450px;
-            margin: 3rem auto;
-            padding: 3rem;
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-
-        .admin-login h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2.2rem;
-            font-weight: 700;
-        }
-
+        /* Toast */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -630,6 +758,17 @@
             font-size: 1.2rem;
         }
 
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .grid-view {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .grid-view.large {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 padding: 0 1rem;
@@ -645,12 +784,27 @@
             }
 
             .sidebar {
-                width: 300px;
+                width: 320px;
+            }
+
+            .view-controls-sidebar {
+                grid-template-columns: 1fr;
             }
 
             .images-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
                 gap: 1.5rem;
+            }
+
+            .grid-view {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .grid-view.small {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .grid-view.large {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
 
             .container {
@@ -664,10 +818,20 @@
             .modal-content {
                 padding: 2rem;
             }
-            
-            .admin-login {
-                margin: 2rem auto;
-                padding: 2rem;
+
+            .list-view .image-card {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .list-view .image-card img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .adsense-container.vertical {
+                width: 100%;
+                max-width: 300px;
             }
         }
 
@@ -681,10 +845,21 @@
             }
             
             .header-controls {
-                gap: 1rem;
+                gap: 0.8rem;
+            }
+
+            .sidebar {
+                width: 100%;
+                right: -100%;
             }
 
             .images-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-view.small,
+            .grid-view.medium,
+            .grid-view.large {
                 grid-template-columns: 1fr;
             }
 
@@ -696,35 +871,60 @@
                 font-size: 2rem;
             }
             
-            .sidebar {
-                width: 100%;
-                right: -100%;
-            }
-            
             .modal-content {
                 padding: 1.5rem;
             }
+
+            .adsense-container {
+                margin: 1rem 0;
+            }
+        }
+
+        /* Keyboard Navigation */
+        .image-card:focus {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header-controls,
+            .sidebar,
+            .modal-actions,
+            .toast,
+            .adsense-container {
+                display: none !important;
+            }
             
-            .admin-login {
-                padding: 1.5rem;
-                margin: 1rem auto;
+            .image-card {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Google Site Verification File -->
+    <div class="sr-only">
+        google-site-verification: google69ff7d255be64110.html
+    </div>
+
+    <!-- Loading Bar -->
+    <div class="loading-bar" id="loadingBar"></div>
+
     <header>
         <div class="header-content">
             <div class="logo">
-                <i class="fas fa-robot"></i>
+                <i class="fas fa-robot" aria-hidden="true"></i>
                 Premium <span>AI</span>
             </div>
             <div class="header-controls">
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
+                <button class="theme-toggle" id="themeToggle" title="تبديل الوضع الليلي">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
+                <button class="menu-toggle" id="menuToggle" title="فتح القائمة">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -732,28 +932,106 @@
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="sidebar-title">القائمة</div>
+            <div class="sidebar-title">القائمة والإعدادات</div>
             <button class="close-sidebar" id="closeSidebar">
-                <i class="fas fa-times"></i>
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
         </div>
+        
+        <div class="sidebar-counter" id="sidebarCounter">
+            <i class="fas fa-images" aria-hidden="true"></i>
+            <span class="count" id="sidebarImagesCount">0</span>
+            <span>صورة متاحة</span>
+        </div>
+
+        <!-- View Controls in Sidebar -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">
+                <i class="fas fa-th-large"></i>
+                طريقة العرض
+            </div>
+            <div class="view-controls-sidebar">
+                <button class="view-control-btn active" id="gridViewSidebar" data-view="grid">
+                    <i class="fas fa-th"></i>
+                    شبكة
+                </button>
+                <button class="view-control-btn" id="listViewSidebar" data-view="list">
+                    <i class="fas fa-list"></i>
+                    قائمة
+                </button>
+                <button class="view-control-btn" id="smallGridSidebar" data-view="small">
+                    <i class="fas fa-th-small"></i>
+                    صغيرة
+                </button>
+                <button class="view-control-btn" id="largeGridSidebar" data-view="large">
+                    <i class="fas fa-th-large"></i>
+                    كبيرة
+                </button>
+            </div>
+        </div>
+
+        <!-- Accessibility Options in Sidebar -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">
+                <i class="fas fa-universal-access"></i>
+                إمكانية الوصول
+            </div>
+            <div class="accessibility-options">
+                <div class="accessibility-option">
+                    <input type="checkbox" id="highContrastSidebar">
+                    <label for="highContrastSidebar">تباين عالي</label>
+                </div>
+                <div class="accessibility-option">
+                    <input type="checkbox" id="largeTextSidebar">
+                    <label for="largeTextSidebar">نص كبير</label>
+                </div>
+                <div class="accessibility-option">
+                    <input type="checkbox" id="readingModeSidebar">
+                    <label for="readingModeSidebar">وضع القراءة</label>
+                </div>
+            </div>
+        </div>
+        
         <ul>
-            <li><a href="#" id="adminLink"><i class="fas fa-cog"></i> صفحة الإدارة</a></li>
-            <li><a href="#" id="homeLink"><i class="fas fa-home"></i> الصفحة الرئيسية</a></li>
-            <li><a href="#"><i class="fas fa-users"></i> من نحن</a></li>
-            <li><a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
-            <li><a href="#"><i class="fas fa-shield-alt"></i> سياسة الخصوصية</a></li>
-            <li><a href="#"><i class="fas fa-file-contract"></i> اتفاقية المستخدم</a></li>
+            <li><a href="we.html"><i class="fas fa-users" aria-hidden="true"></i> من نحن</a></li>
+            <li><a href="Get.html"><i class="fas fa-envelope" aria-hidden="true"></i> اتصل بنا</a></li>
+            <li><a href="privacy.html"><i class="fas fa-shield-alt" aria-hidden="true"></i> سياسة الخصوصية</a></li>
+            <li><a href="agreement.html"><i class="fas fa-file-contract" aria-hidden="true"></i> اتفاقية المستخدم</a></li>
         </ul>
     </div>
     <div class="overlay" id="overlay"></div>
 
     <div class="container" id="mainPage">
         <h1 class="page-title">معرض الصور</h1>
-        <div class="images-grid" id="imagesGrid">
+        
+        <!-- AdSense Header Banner -->
+        <div class="adsense-container horizontal" id="adsenseHeader">
+            <div class="adsense-placeholder">
+                <i class="fas fa-ad"></i>
+                <p>مساحة إعلانية - Header</p>
+            </div>
+        </div>
+
+        <div class="images-grid grid-view medium" id="imagesGrid">
             <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
                 <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
                 <p>جاري تحميل الصور...</p>
+            </div>
+        </div>
+
+        <!-- AdSense Footer Banner -->
+        <div class="adsense-container horizontal" id="adsenseFooter">
+            <div class="adsense-placeholder">
+                <i class="fas fa-ad"></i>
+                <p>مساحة إعلانية - Footer</p>
+            </div>
+        </div>
+
+        <!-- AdSense Sidebar Rectangle -->
+        <div class="adsense-container rectangle" id="adsenseSidebar" style="display: none;">
+            <div class="adsense-placeholder">
+                <i class="fas fa-ad"></i>
+                <p>مساحة إعلانية - Sidebar</p>
             </div>
         </div>
     </div>
@@ -761,7 +1039,7 @@
     <div class="modal" id="imageModal">
         <div class="modal-content">
             <button class="close-modal" id="closeModal">
-                <i class="fas fa-times"></i>
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
             <div class="modal-image-container">
                 <img class="modal-image" id="modalImage" src="" alt="">
@@ -771,70 +1049,17 @@
             </div>
             <div class="modal-actions">
                 <button class="copy-btn" id="copyText">
-                    <i class="fas fa-copy"></i> نسخ النص
+                    <i class="fas fa-copy" aria-hidden="true"></i> نسخ النص
                 </button>
                 <div class="modal-publisher" id="modalPublisher">
-                    <i class="fas fa-user"></i> <span id="publisherNameSpan"></span>
+                    <i class="fas fa-user" aria-hidden="true"></i> <span id="publisherNameSpan"></span>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container" id="adminPage" style="display: none;">
-        <h1 class="page-title">لوحة الإدارة</h1>
-        <div class="admin-content">
-            <div class="upload-area" id="uploadArea">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <p>اسحب وأفلت الصورة هنا أو انقر للاختيار</p>
-                <button type="button" class="upload-btn">اختر صورة</button>
-                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-                <img class="preview-image" id="previewImage" src="" alt="معاينة الصورة">
-                <div class="upload-status" id="uploadStatus"></div>
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress" id="progress"></div>
-                </div>
-            </div>
-            
-            <form id="uploadForm">
-                <div class="form-group">
-                    <label for="imageTitle"><i class="fas fa-heading"></i> عنوان الصورة:</label>
-                    <input type="text" id="imageTitle" required placeholder="أدخل عنوان جذاب للصورة">
-                </div>
-                
-                <div class="form-group">
-                    <label for="imageText"><i class="fas fa-align-left"></i> النص المرافق:</label>
-                    <textarea id="imageText" required placeholder="أدخل النص المرافق للصورة"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="publisherNameInput"><i class="fas fa-user-edit"></i> اسم الناشر:</label>
-                    <input type="text" id="publisherNameInput" required placeholder="أدخل اسم الناشر">
-                </div>
-                
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i> نشر الصورة
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div class="container" id="loginPage" style="display: none;">
-        <div class="admin-login">
-            <h2><i class="fas fa-lock"></i> تسجيل الدخول للإدارة</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="adminPassword"><i class="fas fa-key"></i> كلمة المرور:</label>
-                    <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور">
-                </div>
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-sign-in-alt"></i> دخول
-                </button>
-            </form>
         </div>
     </div>
 
     <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
         <span id="toastMessage"></span>
     </div>
 
@@ -844,28 +1069,26 @@
         const supabaseUrl = 'https://llvlczpbvmtrnskzlaqr.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxsdmxjenBidm10cm5za3psYXFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg5MTA3OTQsImV4cCI6MjA3NDQ4Njc5NH0.ElQ9v2BcAuqFas9_k4cCsm39IPL6vpRasXDuetXvGww';
         
-        console.log('جاري تهيئة Supabase...');
         const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-        console.log('تم تهيئة Supabase:', supabase);
 
         // DOM elements
         let themeToggle, menuToggle, closeSidebar, sidebar, overlay, imagesGrid, imageModal, closeModal;
-        let modalImage, modalText, publisherNameSpan, copyText, adminLink, homeLink, mainPage, adminPage;
-        let loginPage, loginForm, uploadForm, uploadArea, imageUpload, previewImage, uploadStatus;
-        let progressBar, progress, imageTitle, imageText, publisherNameInput, submitBtn, toast, toastMessage;
+        let modalImage, modalText, publisherNameSpan, copyText, mainPage;
+        let sidebarCounter, sidebarImagesCount, toast, toastMessage;
+        let gridViewSidebar, listViewSidebar, smallGridSidebar, largeGridSidebar;
+        let highContrastSidebar, largeTextSidebar, readingModeSidebar;
+        let loadingBar;
 
         // المتغيرات العامة
-        let selectedImageFile = null;
-        let isAdmin = false;
-        let isUploading = false;
+        let totalImagesCount = 0;
+        let currentView = 'grid';
+        let currentGridSize = 'medium';
 
         // دالة لفحص اتصال Supabase
         async function checkSupabaseConnection() {
             try {
-                console.log('جاري فحص اتصال Supabase...');
                 const { data, error } = await supabase.from('images').select('count').limit(1);
                 if (error) throw error;
-                console.log('✅ اتصال Supabase شغال');
                 return true;
             } catch (error) {
                 console.error('❌ خطأ في اتصال Supabase:', error);
@@ -875,57 +1098,74 @@
 
         // تحميل الصور من Supabase
         async function loadImages() {
+            showLoading();
             try {
-                console.log('جاري تحميل الصور...');
-                
                 const { data: images, error } = await supabase
                     .from('images')
                     .select('*')
                     .order('created_at', { ascending: false });
 
-                if (error) {
-                    console.error('خطأ من Supabase:', error);
-                    throw error;
-                }
+                if (error) throw error;
 
-                console.log('تم تحميل الصور:', images);
                 imagesGrid.innerHTML = '';
                 
                 if (images && images.length > 0) {
-                    images.forEach(image => {
-                        const imageCard = document.createElement('div');
-                        imageCard.className = 'image-card';
-                        imageCard.innerHTML = `
-                            <img src="${image.image_url}" alt="${image.title}" loading="lazy">
-                            <div class="image-info">
-                                <div class="image-title">${image.title}</div>
-                                <div class="image-publisher">
-                                    <i class="fas fa-user"></i> ${image.publisher}
-                                </div>
-                            </div>
-                        `;
-                        
-                        imageCard.addEventListener('click', () => {
-                            openModal(image);
-                        });
-                        
-                        imagesGrid.appendChild(imageCard);
+                    totalImagesCount = images.length;
+                    updateImagesCounter();
+                    
+                    // Lazy Loading implementation
+                    images.forEach((image, index) => {
+                        setTimeout(() => {
+                            createImageCard(image, index);
+                        }, index * 100);
                     });
                 } else {
+                    totalImagesCount = 0;
+                    updateImagesCounter();
                     showNoImagesMessage();
                 }
             } catch (error) {
                 console.error('Error loading images:', error);
-                imagesGrid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #ff4757; margin-bottom: 1rem;"></i>
-                        <h3 style="color: #ff4757; margin-bottom: 1rem;">حدث خطأ في تحميل الصور</h3>
-                        <p style="color: var(--secondary-color);">خطأ: ${error.message}</p>
-                        <button onclick="location.reload()" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 1rem; cursor: pointer;">
-                            إعادة تحميل الصفحة
-                        </button>
+                showError();
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // إنشاء بطاقة صورة
+        function createImageCard(image, index) {
+            const imageCard = document.createElement('div');
+            imageCard.className = 'image-card';
+            imageCard.tabIndex = 0;
+            imageCard.setAttribute('role', 'button');
+            imageCard.setAttribute('aria-label', `عرض صورة ${image.title}`);
+            
+            imageCard.innerHTML = `
+                <img src="${image.image_url}" alt="${image.title}" loading="lazy">
+                <div class="image-info">
+                    <div class="image-title">${image.title}</div>
+                    <div class="image-publisher">
+                        <i class="fas fa-user"></i> ${image.publisher}
                     </div>
-                `;
+                </div>
+            `;
+            
+            imageCard.addEventListener('click', () => openModal(image));
+            imageCard.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal(image);
+                }
+            });
+            
+            imagesGrid.appendChild(imageCard);
+        }
+
+        // تحديث عداد الصور
+        function updateImagesCounter() {
+            if (sidebarImagesCount) {
+                sidebarImagesCount.textContent = totalImagesCount;
+                sidebarCounter.style.display = totalImagesCount === 0 ? 'none' : 'flex';
             }
         }
 
@@ -940,9 +1180,33 @@
             `;
         }
 
+        // عرض رسالة خطأ
+        function showError() {
+            imagesGrid.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #ff4757; margin-bottom: 1rem;"></i>
+                    <h3 style="color: #ff4757; margin-bottom: 1rem;">حدث خطأ في تحميل الصور</h3>
+                    <button onclick="location.reload()" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 1rem; cursor: pointer;">
+                        إعادة تحميل الصفحة
+                    </button>
+                </div>
+            `;
+        }
+
+        // إظهار شريط التحميل
+        function showLoading() {
+            if (loadingBar) loadingBar.classList.add('active');
+        }
+
+        // إخفاء شريط التحميل
+        function hideLoading() {
+            if (loadingBar) loadingBar.classList.remove('active');
+        }
+
         // فتح القائمة المنبثقة
         function openModal(image) {
             modalImage.src = image.image_url;
+            modalImage.alt = image.title;
             modalText.textContent = image.text;
             publisherNameSpan.textContent = image.publisher;
             imageModal.classList.add('active');
@@ -976,214 +1240,116 @@
             }, 3000);
         }
 
-        // تحديث حالة الرفع
-        function updateUploadStatus(message, color) {
-            uploadStatus.textContent = message;
-            uploadStatus.style.color = color;
-            uploadStatus.style.display = 'block';
-            uploadStatus.style.background = color === 'green' ? 'rgba(46, 204, 113, 0.1)' : 
-                                           color === 'red' ? 'rgba(231, 76, 60, 0.1)' : 
-                                           'rgba(52, 152, 219, 0.1)';
-            uploadStatus.style.border = `1px solid ${color}`;
-        }
-
-        // تحديث شريط التقدم
-        function updateProgress(percent) {
-            progress.style.width = percent + '%';
-        }
-
-        // تحميل الصورة للمعاينة
-        function handleImageUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                if (!file.type.startsWith('image/')) {
-                    showToast('يرجى اختيار ملف صورة فقط');
-                    return;
-                }
-                
-                if (file.size > 5 * 1024 * 1024) {
-                    showToast('حجم الصورة كبير جداً (الحد الأقصى 5MB)');
-                    return;
-                }
-                
-                selectedImageFile = file;
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    previewImage.src = e.target.result;
-                    previewImage.style.display = 'block';
-                    updateUploadStatus('✓ تم تحميل الصورة بنجاح', 'green');
-                    progressBar.style.display = 'none';
-                };
-                
-                reader.onerror = function() {
-                    updateUploadStatus('✗ فشل في تحميل الصورة', 'red');
-                };
-                
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // رفع الصورة والنص إلى Supabase - الإصدار المصحح
-        async function uploadImage(event) {
-            event.preventDefault();
-            
-            if (isUploading) {
-                showToast('جاري رفع صورة أخرى، يرجى الانتظار...');
-                return;
-            }
-            
-            if (!selectedImageFile) {
-                showToast('يرجى اختيار صورة أولاً');
-                return;
-            }
-            
-            if (!imageTitle.value.trim() || !imageText.value.trim() || !publisherNameInput.value.trim()) {
-                showToast('يرجى ملء جميع الحقول المطلوبة');
-                return;
-            }
-            
-            // بدء عملية الرفع
-            isUploading = true;
-            submitBtn.disabled = true;
-            submitBtn.classList.add('loading');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري النشر...';
-            
-            // إظهار شريط التقدم
-            progressBar.style.display = 'block';
-            updateProgress(0);
-            updateUploadStatus('جاري رفع الصورة إلى الخادم...', 'blue');
-            
-            try {
-                console.log('بدء رفع الصورة...');
-                
-                // 1. رفع الصورة إلى Supabase Storage
-                const fileName = `${Date.now()}_${selectedImageFile.name}`;
-                console.log('اسم الملف:', fileName);
-                
-                const { data: uploadData, error: uploadError } = await supabase.storage
-                    .from('images')
-                    .upload(fileName, selectedImageFile);
-                
-                if (uploadError) {
-                    console.error('خطأ في رفع الصورة:', uploadError);
-                    throw uploadError;
-                }
-                
-                console.log('تم رفع الصورة بنجاح:', uploadData);
-                updateProgress(50);
-                updateUploadStatus('جاري الحصول على رابط الصورة...', 'blue');
-                
-                // 2. الحصول على رابط الصورة
-                const { data: urlData } = supabase.storage
-                    .from('images')
-                    .getPublicUrl(fileName);
-                
-                const imageUrl = urlData.publicUrl;
-                console.log('رابط الصورة:', imageUrl);
-                
-                updateProgress(75);
-                updateUploadStatus('جاري حفظ البيانات...', 'blue');
-                
-                // 3. حفظ البيانات في قاعدة البيانات
-                const { data: dbData, error: dbError } = await supabase
-                    .from('images')
-                    .insert([
-                        {
-                            title: imageTitle.value.trim(),
-                            text: imageText.value.trim(),
-                            publisher: publisherNameInput.value.trim(),
-                            image_url: imageUrl,
-                            created_at: new Date().toISOString()
-                        }
-                    ]);
-                
-                if (dbError) {
-                    console.error('خطأ في حفظ البيانات:', dbError);
-                    throw dbError;
-                }
-                
-                console.log('تم حفظ البيانات بنجاح:', dbData);
-                updateProgress(100);
-                updateUploadStatus('✓ تم النشر بنجاح!', 'green');
-                showToast('تم نشر الصورة بنجاح');
-                
-                // إعادة تعيين النموذج بعد نجاح الرفع
-                setTimeout(() => {
-                    resetUploadForm();
-                    // إعادة تحميل الصور
-                    loadImages();
-                }, 1500);
-                
-            } catch (error) {
-                console.error('حدث خطأ أثناء الرفع:', error);
-                updateUploadStatus('✗ فشل في الرفع: ' + error.message, 'red');
-                showToast('حدث خطأ أثناء الرفع: ' + error.message);
-                resetUploadForm();
-            }
-        }
-
-        // إعادة تعيين نموذج الرفع
-        function resetUploadForm() {
-            isUploading = false;
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('loading');
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> نشر الصورة';
-            
-            uploadForm.reset();
-            previewImage.style.display = 'none';
-            selectedImageFile = null;
-            progressBar.style.display = 'none';
-            updateProgress(0);
-            
-            setTimeout(() => {
-                uploadStatus.style.display = 'none';
-            }, 3000);
-        }
-
-        // التحقق من تسجيل الدخول
-        function checkLogin(event) {
-            event.preventDefault();
-            const password = document.getElementById('adminPassword').value;
-            
-            if (password === 'SK_A803ss') {
-                isAdmin = true;
-                loginPage.style.display = 'none';
-                adminPage.style.display = 'block';
-                mainPage.style.display = 'none';
-                showToast('تم تسجيل الدخول بنجاح');
-            } else {
-                showToast('كلمة المرور غير صحيحة');
-            }
-        }
-
-        // العودة إلى الصفحة الرئيسية
-        function goToHome() {
-            mainPage.style.display = 'block';
-            adminPage.style.display = 'none';
-            loginPage.style.display = 'none';
-        }
-
         // تبديل الوضع الليلي/النهاري
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const icon = themeToggle.querySelector('i');
             
             if (document.body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
+                icon.classList.replace('fa-moon', 'fa-sun');
                 localStorage.setItem('theme', 'dark');
             } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+                icon.classList.replace('fa-sun', 'fa-moon');
                 localStorage.setItem('theme', 'light');
             }
+        }
+
+        // تطبيق خيارات إمكانية الوصول
+        function applyAccessibility() {
+            // التباين العالي
+            if (highContrastSidebar.checked) {
+                document.body.classList.add('high-contrast');
+            } else {
+                document.body.classList.remove('high-contrast');
+            }
+
+            // النص الكبير
+            if (largeTextSidebar.checked) {
+                document.body.classList.add('large-text');
+            } else {
+                document.body.classList.remove('large-text');
+            }
+
+            // وضع القراءة
+            if (readingModeSidebar.checked) {
+                document.body.classList.add('reading-mode');
+            } else {
+                document.body.classList.remove('reading-mode');
+            }
+
+            // حفظ الإعدادات
+            localStorage.setItem('highContrast', highContrastSidebar.checked);
+            localStorage.setItem('largeText', largeTextSidebar.checked);
+            localStorage.setItem('readingMode', readingModeSidebar.checked);
+        }
+
+        // تغيير طريقة العرض - FIXED
+        function changeView(viewType) {
+            currentView = viewType;
+            
+            // إزالة جميع classes السابقة
+            imagesGrid.className = 'images-grid';
+            
+            // إزالة النشاط من جميع أزرار العرض
+            document.querySelectorAll('.view-control-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            switch(viewType) {
+                case 'grid':
+                    imagesGrid.classList.add('grid-view', 'medium');
+                    gridViewSidebar.classList.add('active');
+                    currentGridSize = 'medium';
+                    break;
+                case 'list':
+                    imagesGrid.classList.add('list-view');
+                    listViewSidebar.classList.add('active');
+                    break;
+                case 'small':
+                    imagesGrid.classList.add('grid-view', 'small');
+                    smallGridSidebar.classList.add('active');
+                    currentGridSize = 'small';
+                    break;
+                case 'large':
+                    imagesGrid.classList.add('grid-view', 'large');
+                    largeGridSidebar.classList.add('active');
+                    currentGridSize = 'large';
+                    break;
+            }
+            
+            localStorage.setItem('viewType', viewType);
+            localStorage.setItem('gridSize', currentGridSize);
         }
 
         // فتح/إغلاق القائمة الجانبية
         function toggleSidebar() {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
+        }
+
+        // تحميل الإعدادات المحفوظة
+        function loadSettings() {
+            // السمة
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+            }
+
+            // طريقة العرض
+            const savedView = localStorage.getItem('viewType') || 'grid';
+            const savedGridSize = localStorage.getItem('gridSize') || 'medium';
+            currentView = savedView;
+            currentGridSize = savedGridSize;
+            changeView(savedView);
+
+            // إمكانية الوصول
+            if (highContrastSidebar) {
+                highContrastSidebar.checked = localStorage.getItem('highContrast') === 'true';
+                largeTextSidebar.checked = localStorage.getItem('largeText') === 'true';
+                readingModeSidebar.checked = localStorage.getItem('readingMode') === 'true';
+                applyAccessibility();
+            }
         }
 
         // تهيئة الأحداث
@@ -1195,76 +1361,35 @@
             closeModal.addEventListener('click', closeImageModal);
             copyText.addEventListener('click', copyToClipboard);
             
-            adminLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (isAdmin) {
-                    mainPage.style.display = 'none';
-                    adminPage.style.display = 'block';
-                    loginPage.style.display = 'none';
-                } else {
-                    mainPage.style.display = 'none';
-                    adminPage.style.display = 'none';
-                    loginPage.style.display = 'block';
-                }
-                toggleSidebar();
-            });
+            // أحداث طريقة العرض في الصفحة الجانبية
+            gridViewSidebar.addEventListener('click', () => changeView('grid'));
+            listViewSidebar.addEventListener('click', () => changeView('list'));
+            smallGridSidebar.addEventListener('click', () => changeView('small'));
+            largeGridSidebar.addEventListener('click', () => changeView('large'));
             
-            homeLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                goToHome();
-                toggleSidebar();
-            });
+            // أحداث إمكانية الوصول في الصفحة الجانبية
+            highContrastSidebar.addEventListener('change', applyAccessibility);
+            largeTextSidebar.addEventListener('change', applyAccessibility);
+            readingModeSidebar.addEventListener('change', applyAccessibility);
             
-            loginForm.addEventListener('submit', checkLogin);
-            
-            uploadArea.addEventListener('click', () => {
-                imageUpload.click();
-            });
-            
-            imageUpload.addEventListener('change', handleImageUpload);
-            uploadForm.addEventListener('submit', uploadImage);
-            
-            uploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadArea.style.borderColor = 'var(--primary-color)';
-                uploadArea.style.background = 'rgba(74, 108, 247, 0.05)';
-            });
-            
-            uploadArea.addEventListener('dragleave', () => {
-                uploadArea.style.borderColor = 'var(--border-color)';
-                uploadArea.style.background = 'var(--card-bg)';
-            });
-            
-            uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadArea.style.borderColor = 'var(--border-color)';
-                uploadArea.style.background = 'var(--card-bg)';
-                if (e.dataTransfer.files.length) {
-                    imageUpload.files = e.dataTransfer.files;
-                    handleImageUpload({ target: imageUpload });
+            // أحداث لوحة المفاتيح
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeImageModal();
+                    if (sidebar.classList.contains('active')) {
+                        toggleSidebar();
+                    }
                 }
             });
             
             imageModal.addEventListener('click', (e) => {
-                if (e.target === imageModal) {
-                    closeImageModal();
-                }
+                if (e.target === imageModal) closeImageModal();
             });
-        }
-
-        // تحميل السمة المحفوظة
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                themeToggle.querySelector('i').classList.remove('fa-moon');
-                themeToggle.querySelector('i').classList.add('fa-sun');
-            }
         }
 
         // تهيئة التطبيق
         async function init() {
-            // تهيئة العناصر بعد تحميل DOM
+            // تهيئة العناصر
             themeToggle = document.getElementById('themeToggle');
             menuToggle = document.getElementById('menuToggle');
             closeSidebar = document.getElementById('closeSidebar');
@@ -1277,45 +1402,34 @@
             modalText = document.getElementById('modalText');
             publisherNameSpan = document.getElementById('publisherNameSpan');
             copyText = document.getElementById('copyText');
-            adminLink = document.getElementById('adminLink');
-            homeLink = document.getElementById('homeLink');
             mainPage = document.getElementById('mainPage');
-            adminPage = document.getElementById('adminPage');
-            loginPage = document.getElementById('loginPage');
-            loginForm = document.getElementById('loginForm');
-            uploadForm = document.getElementById('uploadForm');
-            uploadArea = document.getElementById('uploadArea');
-            imageUpload = document.getElementById('imageUpload');
-            previewImage = document.getElementById('previewImage');
-            uploadStatus = document.getElementById('uploadStatus');
-            progressBar = document.getElementById('progressBar');
-            progress = document.getElementById('progress');
-            imageTitle = document.getElementById('imageTitle');
-            imageText = document.getElementById('imageText');
-            publisherNameInput = document.getElementById('publisherNameInput');
-            submitBtn = document.getElementById('submitBtn');
+            sidebarCounter = document.getElementById('sidebarCounter');
+            sidebarImagesCount = document.getElementById('sidebarImagesCount');
             toast = document.getElementById('toast');
             toastMessage = document.getElementById('toastMessage');
+            gridViewSidebar = document.getElementById('gridViewSidebar');
+            listViewSidebar = document.getElementById('listViewSidebar');
+            smallGridSidebar = document.getElementById('smallGridSidebar');
+            largeGridSidebar = document.getElementById('largeGridSidebar');
+            highContrastSidebar = document.getElementById('highContrastSidebar');
+            largeTextSidebar = document.getElementById('largeTextSidebar');
+            readingModeSidebar = document.getElementById('readingModeSidebar');
+            loadingBar = document.getElementById('loadingBar');
             
-            // فحص الاتصال أولاً
+            // فحص الاتصال
             const isConnected = await checkSupabaseConnection();
             if (!isConnected) {
-                imagesGrid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-                        <i class="fas fa-wifi-slash" style="font-size: 3rem; color: #ff4757; margin-bottom: 1rem;"></i>
-                        <h3 style="color: #ff4757; margin-bottom: 1rem;">لا يوجد اتصال بقاعدة البيانات</h3>
-                        <p style="color: var(--secondary-color);">يرجى التحقق من اتصال Supabase</p>
-                    </div>
-                `;
+                showError();
                 return;
             }
             
-            loadTheme();
+            // تحميل الإعدادات والصور
+            loadSettings();
             loadImages();
             initEvents();
         }
 
-        // تشغيل التطبيق عند تحميل الصفحة
+        // تشغيل التطبيق
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
