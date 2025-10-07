@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتفاقية المستخدم - Premium AI | معرض الصور الذكي</title>
+    <meta name="description" content="اتفاقية استخدام موقع Premium AI - تعرف على الشروط والأحكام التي تحكم استخدامك لمنصتنا وخدمات الذكاء الاصطناعي.">
+    <meta name="keywords" content="اتفاقية المستخدم, شروط الاستخدام, Premium AI, الذكاء الاصطناعي, معرض الصور, الشروط والأحكام">
+    <meta name="author" content="Premium AI">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="اتفاقية المستخدم - Premium AI">
+    <meta property="og:description" content="اتفاقية استخدام موقع Premium AI - تعرف على الشروط والأحكام التي تحكم استخدامك لمنصتنا">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://premiumai.vercel.app/terms.html">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "اتفاقية المستخدم - Premium AI",
+        "description": "اتفاقية استخدام موقع Premium AI - تعرف على الشروط والأحكام التي تحكم استخدامك لمنصتنا وخدمات الذكاء الاصطناعي",
+        "url": "https://premiumai.vercel.app/terms.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Premium AI",
+            "description": "معرض الصور المميز مع تقنية الذكاء الاصطناعي"
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": "2024-01-01",
+        "inLanguage": "ar"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #6a75ff;
+            --accent-color: #8a63ff;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #fff;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .high-contrast {
+            --primary-color: #0056b3;
+            --secondary-color: #004494;
+            --accent-color: #003375;
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --card-bg: #f8f8f8;
+            --border-color: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        body.large-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #ffd700;
+            font-weight: 300;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle, .menu-toggle {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle:hover, .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.1);
+        }
+
+        /* Loading Bar */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        .loading-bar.active {
+            transform: scaleX(0.7);
+            animation: loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: scaleX(0); transform-origin: left; }
+            50% { transform: scaleX(1); transform-origin: left; }
+            100% { transform: scaleX(0); transform-origin: right; }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            z-index: 999;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .sidebar-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-sidebar:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* Accessibility Section */
+        .sidebar-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-section-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-section-title i {
+            font-size: 1.1rem;
+        }
+
+        .accessibility-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .accessibility-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .accessibility-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .accessibility-option input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .accessibility-option label {
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            transition: var(--transition);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar ul li a i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .terms-content {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 3rem;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .acceptance-box {
+            background-color: var(--bg-color);
+            border-right: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-right: 1rem;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 3px;
+        }
+
+        .section-text {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .terms-list {
+            margin: 1.5rem 0;
+            padding-right: 2rem;
+        }
+
+        .terms-list li {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .terms-list li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            right: -1.5rem;
+        }
+
+        .numbered-list {
+            margin: 1.5rem 0;
+            padding-right: 2rem;
+            list-style-type: decimal;
+        }
+
+        .numbered-list li {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            padding-right: 1rem;
+        }
+
+        .highlight-box {
+            background-color: var(--bg-color);
+            border-right: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border-right: 4px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .warning-box {
+            background-color: #332701;
+            color: #ffc107;
+        }
+
+        .contact-info {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+        }
+
+        .contact-text {
+            font-size: 1.1rem;
+        }
+
+        .contact-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(74, 108, 247, 0.3);
+            margin-top: 2rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 108, 247, 0.4);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(74, 108, 247, 0.3);
+            z-index: 3000;
+            opacity: 0;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .toast.active {
+            opacity: 1;
+        }
+
+        .toast i {
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .theme-toggle, .menu-toggle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .sidebar {
+                width: 320px;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .terms-content {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .header-controls {
+                gap: 0.8rem;
+            }
+
+            .sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .terms-content {
+                padding: 1.5rem;
+            }
+            
+            .contact-info {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Keyboard Navigation */
+        .terms-content a:focus,
+        .back-btn:focus {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header-controls,
+            .sidebar,
+            .back-btn,
+            .toast {
+                display: none !important;
+            }
+            
+            .terms-content,
+            .contact-info {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Bar -->
+    <div class="loading-bar" id="loadingBar"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo" aria-label="العودة إلى الصفحة الرئيسية">
+                <i class="fas fa-robot" aria-hidden="true"></i>
+                Premium <span>AI</span>
+            </a>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle" title="تبديل الوضع الليلي">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" title="فتح القائمة">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">القائمة والإعدادات</div>
+            <button class="close-sidebar" id="closeSidebar">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        
+        <!-- Accessibility Section -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">
+                <i class="fas fa-universal-access"></i>
+                إمكانية الوصول
+            </div>
+            <div class="accessibility-options">
+                <div class="accessibility-option">
+                    <input type="checkbox" id="highContrastSidebar">
+                    <label for="highContrastSidebar">تباين عالي</label>
+                </div>
+                <div class="accessibility-option">
+                    <input type="checkbox" id="largeTextSidebar">
+                    <label for="largeTextSidebar">نص كبير</label>
+                </div>
+                <div class="accessibility-option">
+                    <input type="checkbox" id="readingModeSidebar">
+                    <label for="readingModeSidebar">وضع القراءة</label>
+                </div>
+            </div>
+        </div>
+        
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> الصفحة الرئيسية</a></li>
+            <li><a href="we.html"><i class="fas fa-users" aria-hidden="true"></i> من نحن</a></li>
+            <li><a href="Get.html"><i class="fas fa-envelope" aria-hidden="true"></i> اتصل بنا</a></li>
+            <li><a href="privacy.html"><i class="fas fa-shield-alt" aria-hidden="true"></i> سياسة الخصوصية</a></li>
+            <li><a href="terms.html" class="active"><i class="fas fa-file-contract" aria-hidden="true"></i> اتفاقية المستخدم</a></li>
+        </ul>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+        <h1 class="page-title">اتفاقية المستخدم</h1>
+        
+        <div class="terms-content">
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                آخر تحديث: 1 يناير 2024
+            </div>
+
+            <div class="acceptance-box">
+                <p class="section-text">
+                    <strong>يرجى قراءة هذه الاتفاقية بعناية قبل استخدام موقع Premium AI.</strong> 
+                    باستخدامك لهذا الموقع، فإنك توافق على الالتزام بالشروط والأحكام المذكورة أدناه. 
+                    إذا كنت لا توافق على هذه الشروط، يرجى عدم استخدام موقعنا.
+                </p>
+            </div>
+
+            <h2 class="section-title">القبول والشروط</h2>
+            <p class="section-text">
+                تشكل هذه الاتفاقية عقدًا legally binding بينك وبين Premium AI. 
+                تحكم استخدامك لموقعنا وخدماتنا المتعلقة بالذكاء الاصطناعي ومعرض الصور.
+            </p>
+
+            <h2 class="section-title">تعريفات</h2>
+            <p class="section-text">في هذه الاتفاقية:</p>
+            <ul class="terms-list">
+                <li>"الموقع" يشير إلى Premium AI ومنصته الإلكترونية</li>
+                <li>"المستخدم" يعني أي شخص يزور أو يستخدم الموقع</li>
+                <li>"المحتوى" يشمل الصور، النصوص، البيانات، والمعلومات المتاحة على الموقع</li>
+                <li>"الخدمات" تعني جميع الخدمات المقدمة عبر الموقع</li>
+            </ul>
+
+            <h2 class="section-title">أهلية الاستخدام</h2>
+            <p class="section-text">
+                يجب أن تكون عمرك 13 سنة على الأقل لاستخدام هذا الموقع. 
+                إذا كنت دون 13 سنة، يرجى عدم استخدام الموقع أو تقديم أي معلومات شخصية.
+            </p>
+
+            <h2 class="section-title">الحساب والمسؤولية</h2>
+            <p class="section-text">أنت مسؤول عن:</p>
+            <ol class="numbered-list">
+                <li>الحفاظ على سرية معلومات حسابك وكلمة المرور</li>
+                <li>جميع الأنشطة التي تحدث تحت حسابك</li>
+                <li>إبلاغنا فورًا عن أي استخدام غير مصرح لحسابك</li>
+                <li>ضمان دقة وكمال المعلومات المقدمة عند التسجيل</li>
+            </ol>
+
+            <h2 class="section-title">قواعد الاستخدام</h2>
+            <p class="section-text">يوافق المستخدم على عدم:</p>
+            <ul class="terms-list">
+                <li>استخدام الموقع لأي غرض غير قانوني أو غير مصرح به</li>
+                <li>انتحال شخصية أي شخص أو كيان</li>
+                <li>تحميل أو مشاركة محتوى غير قانوني، مسيء، أو مخالف للحقوق</li>
+                <li>التدخل في أمن الموقع أو تعطيله</li>
+                <li>استخدام أي وسيلة لجمع أو استخراج بيانات من الموقع</li>
+                <li>نشر محتوى يحتوي على فيروسات أو برمجيات خبيثة</li>
+            </ul>
+
+            <div class="warning-box">
+                <p class="section-text">
+                    <strong>تحذير:</strong> أي انتهاك لهذه الشروط قد يؤدي إلى إنهاء حسابك 
+                    واتخاذ إجراءات قانونية عند الاقتضاء.
+                </p>
+            </div>
+
+            <h2 class="section-title">الملكية الفكرية</h2>
+            <p class="section-text">
+                جميع حقوق الملكية الفكرية في الموقع والمحتوى مملوكة لـ Premium AI أو مرخصة لنا. 
+                يشمل ذلك على سبيل المثال لا الحصر:
+            </p>
+            <ul class="terms-list">
+                <li>الشعارات، العلامات التجارية، وأسماء الخدمات</li>
+                <li>التصميم، الواجهة، والتخطيط</li>
+                <li>البرمجيات والخوارزميات</li>
+                <li>المحتوى النصي والمرئي</li>
+            </ul>
+
+            <h2 class="section-title">المحتوى المقدم من المستخدم</h2>
+            <p class="section-text">
+                عند تحميل أو مشاركة محتوى على موقعنا، فإنك:
+            </p>
+            <ul class="terms-list">
+                <li>تمنحنا ترخيصًا غير حصري وقابل للنقل لاستخدام هذا المحتوى</li>
+                <li>تضمن أن لديك الحقوق اللازمة لمشاركة هذا المحتوى</li>
+                <li>تتحمل المسؤولية الكاملة عن المحتوى الذي تشاركه</li>
+                <li>توافق على أن المحتوى لا ينتهك أي حقوق ملكية فكرية</li>
+            </ul>
+
+            <h2 class="section-title">الضمانات والمسؤولية</h2>
+            <p class="section-text">
+                يقدم الموقع خدماته "كما هي" و"كما هي متاحة". 
+                لا نقدم أي ضمانات صريحة أو ضمنية regarding:
+            </p>
+            <ul class="terms-list">
+                <li>خلو الخدمة من الأخطاء أو العيوب</li>
+                <li>استمرارية توفر الخدمة دون انقطاع</li>
+                <li>دقة أو اكتمال أي محتوى على الموقع</li>
+                <li>ملاءمة الخدمة لأغراض محددة</li>
+            </ul>
+
+            <h2 class="section-title">تحديد المسؤولية</h2>
+            <p class="section-text">
+                لا تتحمل Premium AI المسؤولية عن أي أضرار مباشرة، غير مباشرة، عرضية، 
+                خاصة، أو تبعية ناتجة عن:
+            </p>
+            <ul class="terms-list">
+                <li>استخدام أو عدم القدرة على استخدام الموقع</li>
+                <li>أي محتوى تم الحصول عليه من خلال الموقع</li>
+                <li>الوصول غير المصرح به إلى بياناتك أو نقلها</li>
+                <li>أي تصريحات أو سلوكيات لأي أطراف ثالثة على الموقع</li>
+            </ul>
+
+            <h2 class="section-title">التعويض</h2>
+            <p class="section-text">
+                توافق على تعويض وحماية Premium AI وموظفيه ووكلائه من أي مطالبات، 
+                مسؤوليات، أضرار، خسائر، وتكاليف ناتجة عن:
+            </p>
+            <ul class="terms-list">
+                <li>انتهاكك لهذه الاتفاقية</li>
+                <li>استخدامك للموقع أو الخدمات</li>
+                <li>انتهاكك لأي حقوق لأطراف ثالثة</li>
+                <li>أي محتوى تقدمه أو تشاركه على الموقع</li>
+            </ul>
+
+            <h2 class="section-title">إنهاء الخدمة</h2>
+            <p class="section-text">
+                يحق لنا، وفقًا لتقديرنا الخاص، إنهاء أو تعليق وصولك إلى الموقع فورًا، 
+                دون إشعار مسبق أو مسؤولية، لأي سبب بما في ذلك على سبيل المثال لا الحصر 
+                انتهاكك لشروط هذه الاتفاقية.
+            </p>
+
+            <h2 class="section-title">التغييرات على الاتفاقية</h2>
+            <p class="section-text">
+                نحتفظ بالحق في تعديل أو تحديث هذه الاتفاقية في أي وقت. 
+                سيتم نشر أي تغييرات على هذه الصفحة وسنقوم بتحديث تاريخ "آخر تحديث". 
+                يستمر استخدامك للموقع بعد such changes يشكل موافقتك على التغييرات.
+            </p>
+
+            <h2 class="section-title">القانون الحاكم</h2>
+            <p class="section-text">
+                تخضع هذه الاتفاقية وتفسر وفقًا لقوانين جمهورية مصر العربية. 
+                أي نزاعات تنشأ عن هذه الاتفاقية تخضع للاختصاص الحصري للمحاكم المصرية.
+            </p>
+
+            <h2 class="section-title">أحكام عامة</h2>
+            <p class="section-text">
+                إذا اعتبر أي حكم من هذه الاتفاقية غير صالح أو غير قابل للتنفيذ، 
+                يظل باقي الأحكام ساري المفعول. يشكل هذه الاتفاقية الاتفاقية الكاملة 
+                بينك وبين Premium AI regarding استخدام الموقع.
+            </p>
+
+            <div class="highlight-box">
+                <p class="section-text">
+                    <strong>ملاحظة:</strong> إذا كان لديك أي أسئلة حول هذه الاتفاقية، 
+                    يرجى الاتصال بنا قبل استخدام الموقع.
+                </p>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <h2 class="section-title">معلومات التواصل</h2>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                </div>
+                <div class="contact-text">
+                    <a href="mailto:premiumai803@gmail.com" class="contact-link">premiumai803@gmail.com</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-headset" aria-hidden="true"></i>
+                </div>
+                <div class="contact-text">
+                    <a href="Get.html" class="contact-link">التواصل من خلال صفحة اتصل بنا</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                </div>
+                <div class="contact-text">القاهرة، مصر</div>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            العودة للصفحة الرئيسية
+        </a>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        // تهيئة العناصر
+        let themeToggle, menuToggle, closeSidebar, sidebar, overlay;
+        let toast, toastMessage;
+        let highContrastSidebar, largeTextSidebar, readingModeSidebar;
+        let loadingBar;
+
+        // عرض رسالة التوست
+        function showToast(message, isError = false) {
+            toastMessage.textContent = message;
+            if (isError) {
+                toast.classList.add('error');
+            } else {
+                toast.classList.remove('error');
+            }
+            toast.classList.add('active');
+            
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 4000);
+        }
+
+        // إدارة الوضع الليلي
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            themeToggle.innerHTML = isDarkMode ? 
+                '<i class="fas fa-sun" aria-hidden="true"></i>' : 
+                '<i class="fas fa-moon" aria-hidden="true"></i>';
+            showToast(isDarkMode ? 'تم تفعيل الوضع الليلي' : 'تم تفعيل الوضع النهاري');
+        }
+
+        // إدارة القائمة الجانبية
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // إدارة إمكانية الوصول
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            const isHighContrast = document.body.classList.contains('high-contrast');
+            localStorage.setItem('highContrast', isHighContrast);
+            showToast(isHighContrast ? 'تم تفعيل التباين العالي' : 'تم إيقاف التباين العالي');
+        }
+
+        function toggleLargeText() {
+            document.body.classList.toggle('large-text');
+            const isLargeText = document.body.classList.contains('large-text');
+            localStorage.setItem('largeText', isLargeText);
+            showToast(isLargeText ? 'تم تفعيل النص الكبير' : 'تم إيقاف النص الكبير');
+        }
+
+        function toggleReadingMode() {
+            document.body.classList.toggle('reading-mode');
+            const isReadingMode = document.body.classList.contains('reading-mode');
+            localStorage.setItem('readingMode', isReadingMode);
+            showToast(isReadingMode ? 'تم تفعيل وضع القراءة' : 'تم إيقاف وضع القراءة');
+        }
+
+        // تحميل الإعدادات المحفوظة
+        function loadSavedSettings() {
+            // الوضع الليلي
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun" aria-hidden="true"></i>';
+            }
+            
+            // التباين العالي
+            if (localStorage.getItem('highContrast') === 'true') {
+                document.body.classList.add('high-contrast');
+                highContrastSidebar.checked = true;
+            }
+            
+            // النص الكبير
+            if (localStorage.getItem('largeText') === 'true') {
+                document.body.classList.add('large-text');
+                largeTextSidebar.checked = true;
+            }
+            
+            // وضع القراءة
+            if (localStorage.getItem('readingMode') === 'true') {
+                document.body.classList.add('reading-mode');
+                readingModeSidebar.checked = true;
+            }
+        }
+
+        // تهيئة الصفحة
+        function init() {
+            console.log('جاري تهيئة صفحة اتفاقية المستخدم...');
+            
+            // الحصول على عناصر DOM
+            themeToggle = document.getElementById('themeToggle');
+            menuToggle = document.getElementById('menuToggle');
+            closeSidebar = document.getElementById('closeSidebar');
+            sidebar = document.getElementById('sidebar');
+            overlay = document.getElementById('overlay');
+            toast = document.getElementById('toast');
+            toastMessage = document.getElementById('toastMessage');
+            highContrastSidebar = document.getElementById('highContrastSidebar');
+            largeTextSidebar = document.getElementById('largeTextSidebar');
+            readingModeSidebar = document.getElementById('readingModeSidebar');
+            loadingBar = document.getElementById('loadingBar');
+            
+            // إضافة مستمعي الأحداث
+            themeToggle.addEventListener('click', toggleTheme);
+            menuToggle.addEventListener('click', toggleSidebar);
+            closeSidebar.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+            
+            // إعدادات إمكانية الوصول
+            highContrastSidebar.addEventListener('change', toggleHighContrast);
+            largeTextSidebar.addEventListener('change', toggleLargeText);
+            readingModeSidebar.addEventListener('change', toggleReadingMode);
+            
+            // تحميل الإعدادات المحفوظة
+            loadSavedSettings();
+            
+            // إظهار شريط التحميل
+            loadingBar.classList.add('active');
+            setTimeout(() => {
+                loadingBar.classList.remove('active');
+            }, 1500);
+            
+            console.log('✅ تم تهيئة صفحة اتفاقية المستخدم بنجاح');
+        }
+
+        // تهيئة الصفحة عند تحميل DOM
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
