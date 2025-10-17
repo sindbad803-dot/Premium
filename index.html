@@ -33,6 +33,10 @@
     }
     </script>
     
+    <!-- Google AdSense Code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1175485143935799"
+     crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -45,6 +49,7 @@
             --border-color: #e0e0e0;
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --glow-color: rgba(74, 108, 247, 0.3);
         }
 
         .dark-mode {
@@ -53,6 +58,7 @@
             --card-bg: #1e1e1e;
             --border-color: #333;
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            --glow-color: rgba(74, 108, 247, 0.5);
         }
 
         .high-contrast {
@@ -63,6 +69,7 @@
             --text-color: #000000;
             --card-bg: #f8f8f8;
             --border-color: #000000;
+            --glow-color: rgba(0, 86, 179, 0.4);
         }
 
         * {
@@ -484,15 +491,12 @@
             width: 300px;
             height: 100%;
             flex-shrink: 0;
-            object-fit: cover;
+            object-fit: contain;
+            background-color: #f5f5f5;
         }
 
-        .list-view .image-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 2rem;
+        .dark-mode .list-view .image-card img {
+            background-color: #2a2a2a;
         }
 
         .image-card {
@@ -506,6 +510,7 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.6s ease forwards;
+            position: relative;
         }
 
         @keyframes fadeInUp {
@@ -518,13 +523,46 @@
         .image-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        /* تأثير الإضاءة الجميل */
+        .image-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, var(--glow-color) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .image-card:hover::before {
+            opacity: 0.6;
+            animation: gentleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes gentleGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
         .grid-view .image-card img {
             width: 100%;
             height: 220px;
-            object-fit: cover;
+            object-fit: contain;
             transition: var(--transition);
+            background-color: #f5f5f5;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dark-mode .grid-view .image-card img {
+            background-color: #2a2a2a;
         }
 
         .image-card:hover img {
@@ -533,6 +571,8 @@
 
         .image-info {
             padding: 1.5rem;
+            position: relative;
+            z-index: 2;
         }
 
         .image-title {
@@ -552,6 +592,65 @@
 
         .image-publisher i {
             font-size: 0.8rem;
+        }
+
+        /* Copy Promo Button */
+        .copy-promo-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        .dark-mode .copy-promo-btn {
+            background: rgba(30, 30, 30, 0.9);
+            color: #fff;
+        }
+
+        .copy-promo-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-promo-btn.copied {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .copy-promo-btn.copied::after {
+            content: 'تم النسخ!';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            animation: fadeOut 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
         /* AdSense Ready Containers */
@@ -670,6 +769,11 @@
             object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background-color: #f5f5f5;
+        }
+
+        .dark-mode .modal-image {
+            background-color: #2a2a2a;
         }
 
         .modal-text-container {
@@ -758,6 +862,78 @@
             font-size: 1.2rem;
         }
 
+        /* Cookie Consent Banner */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            color: var(--text-color);
+            padding: 1.5rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            display: none;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cookie-consent.active {
+            display: block;
+        }
+
+        .cookie-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cookie-text {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .cookie-text a {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cookie-btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cookie-accept {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .cookie-accept:hover {
+            background: var(--secondary-color);
+        }
+
+        .cookie-settings {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .cookie-settings:hover {
+            background: var(--bg-color);
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .grid-view {
@@ -833,6 +1009,16 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+            .cookie-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cookie-buttons {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -878,6 +1064,11 @@
             .adsense-container {
                 margin: 1rem 0;
             }
+
+            .copy-promo-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
         }
 
         /* Keyboard Navigation */
@@ -892,7 +1083,9 @@
             .sidebar,
             .modal-actions,
             .toast,
-            .adsense-container {
+            .adsense-container,
+            .copy-promo-btn,
+            .cookie-consent {
                 display: none !important;
             }
             
@@ -1002,7 +1195,7 @@
     <div class="overlay" id="overlay"></div>
 
     <div class="container" id="mainPage">
-        <h1 class="page-title">معرض الصور</h1>
+        <h1 class="page-title">معرض الصور الذكي بالذكاء الاصطناعي</h1>
         
         <!-- AdSense Header Banner -->
         <div class="adsense-container horizontal" id="adsenseHeader">
@@ -1063,6 +1256,19 @@
         <span id="toastMessage"></span>
     </div>
 
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                نحن نستخدم ملفات تعريف الارتباط (كوكيز) لتحسين تجربتك على موقعنا. باستمرارك في التصفح، فإنك توافق على استخدامنا لملفات تعريف الارتباط وفقًا لـ <a href="privacy.html">سياسة الخصوصية</a>.
+            </div>
+            <div class="cookie-buttons">
+                <button class="cookie-btn cookie-settings" id="cookieSettings">الإعدادات</button>
+                <button class="cookie-btn cookie-accept" id="cookieAccept">موافق</button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         // تهيئة Supabase
@@ -1077,7 +1283,7 @@
         let sidebarCounter, sidebarImagesCount, toast, toastMessage;
         let gridViewSidebar, listViewSidebar, smallGridSidebar, largeGridSidebar;
         let highContrastSidebar, largeTextSidebar, readingModeSidebar;
-        let loadingBar;
+        let loadingBar, cookieConsent, cookieAccept, cookieSettings;
 
         // المتغيرات العامة
         let totalImagesCount = 0;
@@ -1141,6 +1347,9 @@
             imageCard.setAttribute('aria-label', `عرض صورة ${image.title}`);
             
             imageCard.innerHTML = `
+                <button class="copy-promo-btn" data-text="${image.text}">
+                    <i class="fas fa-copy"></i> انسخ البرومو
+                </button>
                 <img src="${image.image_url}" alt="${image.title}" loading="lazy">
                 <div class="image-info">
                     <div class="image-title">${image.title}</div>
@@ -1158,7 +1367,70 @@
                 }
             });
             
+            // إضافة حدث نسخ البرومو
+            const copyPromoBtn = imageCard.querySelector('.copy-promo-btn');
+            copyPromoBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                copyPromoText(image.text, copyPromoBtn);
+            });
+            
             imagesGrid.appendChild(imageCard);
+        }
+
+        // نسخ نص البرومو - تم التصحيح هنا
+        function copyPromoText(text, button) {
+            // التأكد من وجود نص للنسخ
+            if (!text || text.trim() === '') {
+                showToast('لا يوجد نص للنسخ');
+                return;
+            }
+            
+            // استخدام Clipboard API إذا كان متاحًا
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.classList.remove('copied');
+                    }, 2000);
+                    showToast('تم نسخ النص بنجاح');
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                    // استخدام الطريقة القديمة إذا فشلت الطريقة الحديثة
+                    fallbackCopyText(text, button);
+                });
+            } else {
+                // استخدام الطريقة القديمة
+                fallbackCopyText(text, button);
+            }
+        }
+
+        // الطريقة القديمة لنسخ النص
+        function fallbackCopyText(text, button) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.classList.remove('copied');
+                    }, 2000);
+                    showToast('تم نسخ النص بنجاح');
+                } else {
+                    showToast('فشل في نسخ النص');
+                }
+            } catch (err) {
+                console.error('Fallback copy failed: ', err);
+                showToast('فشل في نسخ النص');
+            }
+            
+            document.body.removeChild(textArea);
         }
 
         // تحديث عداد الصور
@@ -1219,15 +1491,29 @@
             document.body.style.overflow = 'auto';
         }
 
-        // نسخ النص
+        // نسخ النص - تم التصحيح هنا أيضًا
         function copyToClipboard() {
             const text = modalText.textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('تم نسخ النص بنجاح');
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-                showToast('فشل في نسخ النص');
-            });
+            
+            // التأكد من وجود نص للنسخ
+            if (!text || text.trim() === '') {
+                showToast('لا يوجد نص للنسخ');
+                return;
+            }
+            
+            // استخدام Clipboard API إذا كان متاحًا
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('تم نسخ النص بنجاح');
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                    // استخدام الطريقة القديمة إذا فشلت الطريقة الحديثة
+                    fallbackCopyText(text);
+                });
+            } else {
+                // استخدام الطريقة القديمة
+                fallbackCopyText(text);
+            }
         }
 
         // عرض رسالة التوست
@@ -1327,6 +1613,26 @@
             overlay.classList.toggle('active');
         }
 
+        // إدارة ملفات تعريف الارتباط
+        function initCookieConsent() {
+            const cookieAccepted = localStorage.getItem('cookieAccepted');
+            if (!cookieAccepted) {
+                setTimeout(() => {
+                    cookieConsent.classList.add('active');
+                }, 1000);
+            }
+            
+            cookieAccept.addEventListener('click', () => {
+                localStorage.setItem('cookieAccepted', 'true');
+                cookieConsent.classList.remove('active');
+            });
+            
+            cookieSettings.addEventListener('click', () => {
+                // يمكن إضافة نافذة إعدادات ملفات تعريف الارتباط هنا
+                alert('إعدادات ملفات تعريف الارتباط ستكون متاحة قريباً');
+            });
+        }
+
         // تحميل الإعدادات المحفوظة
         function loadSettings() {
             // السمة
@@ -1415,6 +1721,9 @@
             largeTextSidebar = document.getElementById('largeTextSidebar');
             readingModeSidebar = document.getElementById('readingModeSidebar');
             loadingBar = document.getElementById('loadingBar');
+            cookieConsent = document.getElementById('cookieConsent');
+            cookieAccept = document.getElementById('cookieAccept');
+            cookieSettings = document.getElementById('cookieSettings');
             
             // فحص الاتصال
             const isConnected = await checkSupabaseConnection();
@@ -1427,6 +1736,7 @@
             loadSettings();
             loadImages();
             initEvents();
+            initCookieConsent();
         }
 
         // تشغيل التطبيق
